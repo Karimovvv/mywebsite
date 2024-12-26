@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from home.models import Setting
+# from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Page with courses")
+    setting = Setting.objects.get()
+    context = {'setting':setting}
+    return render(request,'course.html',context)
 
-    # return render(request,'index.html')

@@ -1,0 +1,33 @@
+{% extends 'homebase.html' %}
+{% load static %}
+
+{% block body %}
+<section class="section">
+  <div data-ref="mixitup-target" class="container" >
+
+    <div class="row" data-ref="mixitup-container">
+
+       {% for tutor in tutor_cr %}ss
+      <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 arts law">
+        <div class="card border-0 rounded-0 hover-shadow">
+          <img class="card-img-top rounded-0" src="images/teachers/teacher-1.jpg" alt="teacher">
+          <div class="card-body">
+            <a href="teacher-single.html">
+              <h4 class="card-title">{{ tutor.name | safe }}</h4>
+            </a>
+            <hr>
+            <p>{{ tutor.subject | safe }}</p>
+            <br>
+            <ul class="list-inline">
+              <li class="list-inline-item"><a class="text-color" href="#"><i class="ti-facebook"></i></a></li>
+              <li class="list-inline-item"><a class="text-color" href="#"><i class="ti-google"></i></a></li>
+              <li class="list-inline-item"><a class="text-color" href="#"><i class="ti-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+       {% endfor %}
+  </div>
+</div>
+</section>
+{% endblock %}
