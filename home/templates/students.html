@@ -22,16 +22,16 @@
 
     <div class="row" data-ref="mixitup-container">
 
-       {% for tutor in tutor_cr %}
+       {% for student in student_cr %}
       <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 arts law">
         <div class="card border-0 rounded-0 hover-shadow">
-          <img class="card-img-top rounded-0" src="{{ tutor.image.url }}" alt="teacher">
+          <img class="card-img-top rounded-0" src="{{ student.image.url }}" alt="teacher">
           <div class="card-body">
             <a href="teacher-single.html">
-              <h4 class="card-title">{{ tutor.name | safe }}</h4>
+              <h4 class="card-title">{{ student.name | safe }}</h4>
             </a>
             <hr>
-            <p>{{ tutor.subject | safe }}</p>
+            <p>{{ student.subject | safe }}</p>
             <br>
             <ul class="list-inline">
               <li class="list-inline-item"><a class="text-color" href="#"><i class="ti-facebook"></i></a></li>

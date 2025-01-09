@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load active_link_tags %}
  <!-- header -->
  <header class="fixed-top header">
@@ -9,9 +10,14 @@
           <div class="col-lg-4 text-center text-lg-left">
             <a class="text-color mr-3" href="callto:+443003030266"><strong>CALL</strong> {{ setting.phone }} </a>
             <ul class="list-inline d-inline">
+
+             
+
+        </li>
               <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="{{ setting.facebook }}"><i class="ti-facebook"></i></a></li>
               <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="{{ setting.youtube }}"><i class="ti-youtube"></i></a></li>
               <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="{{ setting.instagram }}"><i class="ti-instagram"></i></a></li>
+              <li class="dropdown default-dropdown list-inline-item mx-0 ">
             </ul>
           </div>
           <div class="col-lg-8 text-center text-lg-right">
@@ -39,21 +45,48 @@
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav ml-auto text-center">
               <li class="nav-item {% active_link 'home' strict=True %}">
-                <a class="nav-link" href="{% url 'home' %}">Home</a>
+                <a class="nav-link" href="{% url 'home' %}">{% trans "HOME" %}</a>
               </li>
               <li class="nav-item {% active_link 'about' strict=True %} @@about">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
+                <a class="nav-link" href="{% url 'about' %}">{% trans "ABOUT" %}</a>
               </li>
               <li class="nav-item {% active_link 'course' strict=True %} @@courses">
-                <a class="nav-link" href="{% url 'course' %}">COURSES</a>
+                <a class="nav-link" href="{% url 'course' %}">{% trans "COURSE" %}</a>
               </li>
               <li class="nav-item {% active_link 'contact' strict=True %} @@contact">
-                <a class="nav-link" href="{% url 'contact' %}">CONTACT</a>
+                <a class="nav-link" href="{% url 'contact' %}">{% trans "CONTACT" %}</a>
               </li>
               <li class="nav-item {% active_link 'tutors' strict=True %} @@tutors">
-                <a class="nav-link" href="{% url 'tutors' %}">Tutors</a>
+                <a class="nav-link" href="{% url 'tutors' %}">{% trans "TUTORS" %}</a>
+              </li>
+              <li class="nav-item {% active_link 'students' strict=True %} @@students">
+                <a class="nav-link" href="{% url 'students' %}">{% trans "STUDENTS" %}</a>
+              </li>
+              <li class="nav-item {% active_link 'subjects' strict=True %} @@subjects">
+                <a class="nav-link" href="{% url 'subjects' %}">{% trans "SUBJECTS" %}</a>
               </li>
             </ul>
+            <form action="{% url 'selectlanguage' %}" method="post" style="font-size: medium; border-radius: 5px;">
+              {% csrf_token %}
+              <input name="next" type="hidden" value="{{ redirect_to }}">
+              <select name="language" onchange="submit()" >
+
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+                  {% get_language_info_list for LANGUAGES as languages %}
+
+                  {% for language in languages %}
+                      <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                          {{ language.name_local }} ({{ language.code }})
+                      </option>
+                  {% endfor %}
+
+              </select>
+              <noscript>
+                  <input type="submit" value="Set" />
+              </noscript>
+          </form>
+
           </div>
         </nav>
       </div>

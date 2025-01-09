@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'mywebsite.urls'
@@ -109,11 +110,22 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGES = {
+    ('ru', 'Russsian'),
+    ('uz', 'Uzbek'),
+    ('en', 'English'),
+}
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR,'/home/locale'),
+]
+
+LANGUAGE_CODE = 'uz-uz'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+USE_L10 = True
 
 USE_TZ = True
 
@@ -125,6 +137,7 @@ STATIC_URL = 'static/'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

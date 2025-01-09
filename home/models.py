@@ -54,4 +54,43 @@ class ContactForm(ModelForm):
             'subject': TextInput(attrs={'class':'input','placeholder':'Subject'}),
             'message': Textarea(attrs={'class':'input','placeholder':'Your message','rows':'5'}),
         }
-# Create your models here.
+
+class Language(models.Model):
+    name = models.CharField(max_length=20)
+    code = models.CharField(max_length=5)
+    status = models.BooleanField()
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+llist = Language.objects.all()
+list1 = []
+for rs in llist:
+    list1.append((rs.code, rs.name))
+langlist = (list1)
+
+
+class SettingLang(models.Model):
+    setting = models.ForeignKey(Setting, on_delete=models.CASCADE)
+    lang = models.CharField(max_length=6,choices=langlist)
+    title = models.CharField(max_length=100)
+    keywords = models.CharField(max_length=255)
+    description = models.TextField(max_length=500)
+    phone = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    address = models.CharField(max_length=100)
+    smptserver = models.CharField(max_length=50,blank=True)
+    smptemail = models.EmailField(max_length=50,blank=True)
+    smptpassword = models.CharField(max_length=10,blank=True)
+    smptport = models.CharField(max_length=5,blank=True)
+    youtube = models.URLField(blank=True,max_length=50)
+    instagram = models.URLField(blank=True,max_length=50)
+    facebook = models.URLField(blank=True,max_length=50)
+    icon = models.ImageField(blank=True,upload_to='images/')
+    aboutus = models.TextField(max_length=255,default="Default Address")
+    contact = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title

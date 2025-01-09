@@ -17,6 +17,16 @@
       </div>
     </div>
   </section>
+  <div style="text-align: center;" >
+    <p>{% if messages %}
+      {% for message in messages %}
+       <div class="alert alert-{{ message.tags }}" role ="alert">
+        {{ message }}
+       </div>
+       {% endfor %}
+       {% endif %}
+    </p>
+  </div>
   <!-- /page title -->
   
   <!-- contact -->
